@@ -1,0 +1,12 @@
+.barraLateral{
+    width: 1000px;
+    background: #eee;
+}
+
+.lista{
+    list-style: none;
+    padding: 0 0 0 1rem;
+    color: #333;
+    font-size: smaller;
+}
+   

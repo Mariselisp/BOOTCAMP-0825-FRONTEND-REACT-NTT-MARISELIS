@@ -1,13 +1,16 @@
 import { useState } from 'react';
 import { auth } from '../../proxy/Auth/Auth';
-import { Modal } from '../Modal/Modal';
-import './Form.css';
-import { ModalPassword } from '../ModalPassword/ModalPassword';
+import { Modal } from '../../components/Modal/Modal';
+import './Login.css';
+import { ModalPassword } from '../../components/ModalPassword/ModalPassword';
+import { ModalSendEmail } from '../../components/ModalSendEmail/ModalSendEmail';
+import { useNavigate } from 'react-router-dom';
 
-const Form = () => {
+const Login = () => {
+    const navigate = useNavigate();
     const [user, setUser] = useState('');
     const [password, setPassword] = useState('');
-    
+    const [modalState, setModalState] = useState<'none' | 'password' | 'emailSent'>('none');
     const [showModal, setShowModal] = useState<{
       visible: boolean;
       message: string;
@@ -15,6 +18,10 @@ const Form = () => {
       visible: false,
       message: '',
     });    
+    
+    const handleResetPassword = async () =>{
+      setModalState('password');
+    }
 
     const blockSpace = (e: React.KeyboardEvent<HTMLInputElement>) => {
       if (e.key === ' ') {
@@ -36,13 +43,9 @@ const Form = () => {
           }
           return;
         }
-        console.log('datos correctos');
+      sessionStorage.setItem('isAuthenticated', 'true');
+      navigate('/Home');
     };
-
-    const [showModalPassword, setModalPassword] = useState(false); //HOOK
-    const handleResetPassword = async () =>{
-      setModalPassword(true);
-    }
 
   return(
       <div className='formularioInicio'>
@@ -58,8 +61,15 @@ const Form = () => {
           <button onClick={ handleLogin }>Iniciar sesión</button>
         </div>
 
-        {showModalPassword && (
-          <ModalPassword onClose={() => setModalPassword(false)}/>
+        {modalState === 'password' && (
+          <ModalPassword
+            onClose={() => setModalState('none')}
+            onSendSuccess={() => setModalState('emailSent')}
+          />
+        )}
+
+        {modalState === 'emailSent' && (
+          <ModalSendEmail onClose={() => setModalState('none')} />
         )}
 
         {showModal.visible && (
@@ -69,4 +79,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default Login;

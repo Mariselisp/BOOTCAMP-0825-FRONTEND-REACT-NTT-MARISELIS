@@ -1,10 +1,10 @@
-import Form from './components/Form/Form';
 import './App.css'
+import AppRoutes from './routes/AppRoutes';
 
 function App() {
   return (
     <div>
-      <Form />
+      <AppRoutes />
     </div>
   );
 

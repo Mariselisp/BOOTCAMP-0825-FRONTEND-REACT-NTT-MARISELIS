@@ -3,9 +3,10 @@ import { useState } from 'react';
 
 type PropiedadesModal = {
     onClose: () => void;
+    onSendSuccess: () => void;
 };
 
-export const ModalPassword = ({ onClose }: PropiedadesModal) => {
+export const ModalPassword = ({ onClose, onSendSuccess }: PropiedadesModal) => {
     const [emailValidate, setEmailValidate] = useState(true);
     const [email, setEmail] = useState('');
 
@@ -19,6 +20,9 @@ export const ModalPassword = ({ onClose }: PropiedadesModal) => {
         const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         const esValido = regexEmail.test(email);
         setEmailValidate(esValido);
+        if (esValido) {
+            onSendSuccess();
+        }
     }
 
     return (
@@ -35,7 +39,6 @@ export const ModalPassword = ({ onClose }: PropiedadesModal) => {
                     <button onClick={() => emailValidation(email)}>Enviar</button>
                     <button className="close-button" onClick={onClose}>Cerrar</button>
                 </div>
-                
             </div>
         </div>
     );

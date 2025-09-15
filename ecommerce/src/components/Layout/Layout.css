@@ -1,0 +1,15 @@
+.layoutNav{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.layoutSidebar{
+    display: flex;
+    flex: 1;
+}
+
+.layoutOutlet{
+    flex: 1;
+    padding: 1rem;
+}
