@@ -26,15 +26,6 @@ export const Home = () => {
 
     return(
         <Layout>
-            <div className="search">
-                <input type="search" />
-               
-                <div className="button-search">
-                     <button></button>
-                     <img src="/images/search_17450802.png" alt="lupa" />
-                </div>
-               
-            </div>
             <div className="container-products">
             {loading ? (
                 <p>Cargando productos...</p>
@@ -52,7 +43,7 @@ export const Home = () => {
                                 <label>{product.sku}</label>
                             </div>
                             <div className="product-buy">
-                                <button>Comprar</button>
+                                <button>Añadir al carrito</button>
                             </div>
                         </div>
                     ))

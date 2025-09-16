@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import './Sidevar.css';
 import { getAllCategories } from '../../proxy/Categories/GetAllCategories';
 import { useProductContext } from '../../context/ProductContext';
+import { getAllProducts } from '../../proxy/Products/GetAllProducts';
 
 export const Sidebar: React.FC = () => {
   const [categories, setCategories] = useState<string[]>([]);
@@ -39,15 +40,31 @@ export const Sidebar: React.FC = () => {
         const category = selectedCategories[0];
         const response = await fetch(`https://dummyjson.com/products/category/${category}`);
         const data = await response.json();
-        setProducts(data.products); // ← actualiza productos en Home
+        setProducts(data.products);
       } catch (error) {
         console.error('Error al filtrar productos:', error);
       }
     };
 
+    const fetchAllProducts = async () => {
+      try{
+        const products = await getAllProducts();
+        const productsJson = await products.json();
+        setProducts(productsJson.products);
+      }
+      catch(error){
+        console.error('Error al filtrar productos:', error)
+      }
+    }
+
     if (selectedCategories.length > 0) {
       fetchFilteredProducts();
     }
+
+    if(selectedCategories.length == 0){
+      fetchAllProducts();
+    }
+
   }, [selectedCategories, setProducts]);
 
   return (

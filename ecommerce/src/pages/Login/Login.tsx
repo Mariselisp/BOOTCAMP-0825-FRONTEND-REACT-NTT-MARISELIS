@@ -30,20 +30,22 @@ const Login = () => {
     };
     
     const handleLogin = async () => {
-        const response = await auth(user, password);
+      const response = await auth(user, password);
 
-        if(!response.ok){
-          if(response.status == 400){
-            const mensaje = "Nombre de usuario o contraseña incorrecta";
-            setShowModal({visible:true, message:mensaje});
-          }
-          else {
-            const mensaje = "Algo salió mal, inténtelo más tarde";
-            setShowModal({visible:true, message:mensaje});
-          }
-          return;
+      if(!response.ok){
+        if(response.status == 400){
+          const mensaje = "Nombre de usuario o contraseña incorrecta";
+          setShowModal({visible:true, message:mensaje});
         }
+        else {
+          const mensaje = "Algo salió mal, inténtelo más tarde";
+          setShowModal({visible:true, message:mensaje});
+        }
+        return;
+      }
+      const data = await response.json();
       sessionStorage.setItem('isAuthenticated', 'true');
+      sessionStorage.setItem('username', data.firstName);
       navigate('/Home');
     };
 

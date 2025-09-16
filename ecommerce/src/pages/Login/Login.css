@@ -2,13 +2,14 @@
     text-align: center;
 }
 
-.formularioInicio{
+.formularioInicio {
     display: flex;
     flex-direction: column;
     box-shadow:  0 0 0 1px #f7f8f7;
     padding: 50px;
     background-color: rgba(255, 255, 255, 0.671);
     border-radius: 15px;
+    background-color: #595959;
 }
 
 .infoUsuario{
@@ -26,5 +27,5 @@
     flex-direction: column;
     margin-top: 20px;
     cursor: pointer;
-
+    align-items: center;
 }

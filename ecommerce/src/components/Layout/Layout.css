@@ -9,7 +9,6 @@
     flex: 1;
 }
 
-.layoutOutlet{
-    flex: 1;
-    padding: 1rem;
+.layoutMain{
+    width: 1102px;
 }
